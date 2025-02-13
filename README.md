@@ -13,3 +13,11 @@ It's meant to be used on a flash drive with the standard 'ol `X:/games/Game Titl
 Drag both disc 1 and disc 2 files into the .exe at the same time to copy both discs!
 
 (though in case things go haywire, just drag disc 2 by itself and say Yes at the disc 2 prompt for a sweet lil override)
+
+## Building
+
+First things first, install readline with `pip install pyreadline3`. This is a required module used for modifying the destination folder name.
+
+Second things second, install pyinstaller with `pip install pyinstaller` (if you already have it installed, make sure you are using the latest version).
+
+Third things third, run build.bat
