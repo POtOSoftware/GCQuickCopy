@@ -112,6 +112,5 @@ if __name__ == '__main__':
 
         print(f"Copying {disc2_file} to {dest_file_full_path}! Get cozy now hehe")
         shutil.copyfile(disc2_file, dest_file_full_path)
-        print("You're probably gonna wanna rename the destination folder to not include any disc 1 nonsense")
 
     print("Done! Thanks for using RVQuickCopy! x3")
