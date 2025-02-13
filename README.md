@@ -1,4 +1,4 @@
-# RVQuickCopy
+# GCQuickCopy
 
 This is a lil' automation script I made to quickly copy my GameCube ISOs to a flash drive with a single drag 'n drop :3
 
