@@ -59,6 +59,12 @@ if __name__ == '__main__':
         disc2_mode = True
         print(f"Disc 2 detected! Filename: {disc2_file}")
 
+    # get the game id from the iso file and store it
+    # (i REALLY hope every GC game has a 6 byte id)    
+    with open(input_file, 'rb') as f:
+        game_id = f.read(6)
+        game_id = game_id.decode('ascii') # convert the raw binary thing to ascii
+
     dest_file_name = "game.iso"
 
     # get the available drives, stores it into a variable then displays them to the user
@@ -79,7 +85,7 @@ if __name__ == '__main__':
             print("That's not a valid drive! >~<")
 
     # now we construct the destination file path
-    dest_folder_name = Path(input_file).stem # remove the file extension from the input file
+    dest_folder_name = f"{Path(input_file).stem} [{game_id}]" # set the destination folder name to the input file name WITHOUT its extension, and include the game id
     print(f"Destination folder is {dest_folder_name}")
     if yes_no_prompt("Would you like to change this folder name? y/[N] ", False):
         dest_folder_name = input_with_prefill("Please change folder name here: ", dest_folder_name)
