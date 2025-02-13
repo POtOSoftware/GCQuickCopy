@@ -4,6 +4,10 @@ import os
 import shutil
 from pathlib import Path
 from ctypes import windll
+# whoever says "python doesn't need code comments" is BULLSHITTING this shits kinda hard to read
+# either that or i just suck at raw python scripting
+# ...i probably just suck at raw python scripting 3:
+
 
 # big ol get drives function i nabbed from stackoverflow
 def get_drives():
@@ -29,7 +33,7 @@ if __name__ == '__main__':
 
     while True:
         # ask for drive to copy to
-        dest_input = input("Select destination drive pwease: ")
+        dest_input = input("Pwease select destination drive: ")
 
         # uppercase that cause thats the only way it'll work
         dest_drive = dest_input.upper()
@@ -46,7 +50,7 @@ if __name__ == '__main__':
         if disc2_input in ['Y', 'N'] or disc2_input == '':
             break
         else:
-            print("Please type Y or N!")
+            print("Please type Y or N! >~<")
     
     if disc2_input == 'y':
         print("Initiating disc 2 mode >:3")
