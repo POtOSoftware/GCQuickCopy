@@ -59,7 +59,7 @@ if __name__ == '__main__':
     # now we construct the destination file path
     dest_folder_name = Path(input_file).stem # remove the file extension from the input file
     print(dest_folder_name)
-    dest_file_path = f"{dest_drive}/games/{dest_folder_name}" # the final file destination path
+    dest_file_path = f"{dest_drive}games/{dest_folder_name}" # the final file destination path
 
     # create the destination directory
     os.makedirs(dest_file_path, exist_ok=True)
