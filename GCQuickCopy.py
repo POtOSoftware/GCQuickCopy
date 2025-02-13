@@ -3,6 +3,7 @@ import sys
 import os
 import shutil
 import readline
+from tqdm import tqdm
 from pathlib import Path
 from ctypes import windll
 # whoever says "python doesn't need code comments" is BULLSHITTING this shits kinda hard to read
@@ -45,6 +46,18 @@ def input_with_prefill(prompt, prefill):
     result = input(prompt)
     readline.set_pre_input_hook()
     return result
+
+# okay google gemini... lets see what you got
+def copy_file(source, dest):
+    file_size = os.path.getsize(source)
+    with open(source, 'rb') as f_in, open(dest, 'wb') as f_out:
+        with tqdm(total=file_size, unit='B', unit_scale=True, desc=dest.split('/')[-1]) as progress_bar:
+            while True:
+                buf = f_in.read(1024)
+                if not buf:
+                    break
+                f_out.write(buf)
+                progress_bar.update(len(buf))
 
 # funny little public boolean to let the program know if were copying another disc after
 disc2_mode = False
@@ -109,7 +122,7 @@ if __name__ == '__main__':
 
     print(f"Copying {input_file} to {dest_file_full_path}! Get cozy now hehe")
     # copy the file to the destination
-    shutil.copyfile(input_file, dest_file_full_path)
+    copy_file(input_file, dest_file_full_path)
 
     # if there was a 2nd disc present, go ahead and copy that one over too
     if disc2_mode:
@@ -117,6 +130,6 @@ if __name__ == '__main__':
         dest_file_full_path = f"{dest_file_path}/disc2.iso"
 
         print(f"Copying {disc2_file} to {dest_file_full_path}! Get cozy now hehe")
-        shutil.copyfile(disc2_file, dest_file_full_path)
+        copy_file(disc2_file, dest_file_full_path)
 
     print("Done! Thanks for using RVQuickCopy! x3")
