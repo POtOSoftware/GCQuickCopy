@@ -88,11 +88,11 @@ if __name__ == '__main__':
 
     # this is just as an override of sorts in case disc 2 is incorrectly detected        
     if disc2_mode == False:
-        if yes_no_prompt("Is this the 2nd disc? y/[N]", False):
+        if yes_no_prompt("Is this the 2nd disc? y/[N] ", False):
             print("Initiating disc 2 mode >:3")
             dest_file_name = "disc2.iso"
-            # ask for the disc 1 folder name cause this program isnt smart enough to figure it out on its own
-            dest_folder_name = input("What's disc 1's folder name? ")
+            # ask to verify the disc 1 folder name but prefill with the current file name for convenience nya! :3
+            dest_folder_name = input_with_prefill("Pwease verify disc 1's folder name: ", dest_folder_name)
             # set the file path
             dest_file_path = f"{dest_drive}games/{dest_folder_name}"
 
