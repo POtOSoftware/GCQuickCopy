@@ -20,10 +20,18 @@ def get_drives():
     
     return drives
 
+# funny little public boolean to let the program know if were copying another disc after
+disc2_mode = False
+
 if __name__ == '__main__':
     # grab arguments and store them in a variable for elegance
     args = sys.argv
     input_file = args[1] # if the file isnt the first argument, blame the user!
+    # check if there's another args, cause otherwise python gets unhappy
+    if len(args) == 3:
+        disc2_file = args[2]
+        disc2_mode = True
+        print(f"Disc 2 detected! Filename: {disc2_file}")
 
     dest_file_name = "game.iso"
 
@@ -43,23 +51,29 @@ if __name__ == '__main__':
         else:
             # invalid drive letter, loop back to the question
             print("That's not a valid drive! >~<")
-    
-    while True:
-        # ask if the input file is the 2nd disc, default is NO
-        disc2_input = input("Is this the 2nd disc? y/[N]").upper()
-        if disc2_input in ['Y', 'N'] or disc2_input == '':
-            break
-        else:
-            print("Please type Y or N! >~<")
-    
-    if disc2_input == 'y':
-        print("Initiating disc 2 mode >:3")
-        dest_file_name = "disc2.iso"
-    
+
     # now we construct the destination file path
     dest_folder_name = Path(input_file).stem # remove the file extension from the input file
-    print(dest_folder_name)
+    #print(dest_folder_name)
     dest_file_path = f"{dest_drive}games/{dest_folder_name}" # the final file destination path
+
+    # this is just as an override of sorts in case disc 2 is incorrectly detected        
+    if disc2_mode == False:
+        while True:
+            # ask if the input file is the 2nd disc, default is NO
+            disc2_input = input("Is this the 2nd disc? y/[N]").upper()
+            if disc2_input in ['Y', 'N'] or disc2_input == '':
+                break
+            else:
+                print("Please type Y or N! >~<")
+        
+        if disc2_input == 'Y':
+            print("Initiating disc 2 mode >:3")
+            dest_file_name = "disc2.iso"
+            # ask for the disc 1 folder name cause this program isnt smart enough to figure it out on its own
+            dest_folder_name = input("What's disc 1's folder name? ")
+            # set the file path
+            dest_file_path = f"{dest_drive}games/{dest_folder_name}"
 
     # create the destination directory
     os.makedirs(dest_file_path, exist_ok=True)
@@ -69,5 +83,14 @@ if __name__ == '__main__':
     print(f"Copying {input_file} to {dest_file_full_path}! Get cozy now hehe")
     # copy the file to the destination
     shutil.copyfile(input_file, dest_file_full_path)
+
+    # if there was a 2nd disc present, go ahead and copy that one over too
+    if disc2_mode:
+        # change game.iso to disc2.iso so nothing gets accidentally overwritten
+        dest_file_full_path = f"{dest_file_path}/disc2.iso"
+
+        print(f"Copying {disc2_file} to {dest_file_full_path}! Get cozy now hehe")
+        shutil.copyfile(disc2_file, dest_file_full_path)
+        print("You're probably gonna wanna rename the destination folder to not include any disc 1 nonsense")
 
     print("Done! Thanks for using RVQuickCopy! x3")

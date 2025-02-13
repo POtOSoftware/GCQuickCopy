@@ -1,4 +1,4 @@
-RVQuickCopy.spec
-
+GCQuickCopy.spec
 build/
 dist/
+buildcopy.bat

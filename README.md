@@ -10,6 +10,6 @@ Just drag the ISO you wish to copy over the .exe (grab it from Releases), then i
 
 It's meant to be used on a flash drive with the standard 'ol `X:/games/Game Title/game.iso` file path format
 
-Oh! And if the iso you're copying over is the 2nd disc, be sure to type Y at the `Is this the 2nd disc?` prompt! Or else it would overwrite disc 1! (if you copied disc 1 first)
+Drag both disc 1 and disc 2 files into the .exe at the same time to copy both discs!
 
-One last thing! Make sure the .exe is in the same folder as your source .iso! It won't work otherwise
+(though in case things go haywire, just drag disc 2 by itself and say Yes at the disc 2 prompt for a sweet lil override)
